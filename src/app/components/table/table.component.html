@@ -1,0 +1,58 @@
+<label class="label" for="search">Search</label>
+<input
+  type="text"
+  [(ngModel)]="searchValue"
+  class="form-control"
+  id="search"/>
+<div class="container">
+  <table class="table">
+  <thead>
+  <tr>
+    <th class="itemName">Name</th>
+    <th class="itemCity">City</th>
+    <th class="itemAddress">Address</th>
+    <th class="itemPostcode">Postcode</th>
+    <th class="itemYear">Start year</th>
+    <th class="itemDetails">Details</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container
+    class="tableComponent"
+    *ngFor="let venue of venuesJs | searchfilter:searchValue">
+  <tr>
+    <td class="itemName">{{venue.title}}</td>
+    <td class="itemCity">{{venue.location.city}}</td>
+    <td class="itemAddress">>{{venue.location.adress}}</td>
+    <td class="itemPostcode">{{venue.location.zipcode}}</td>
+    <td class="itemDetails">
+      {{ displayStartdate(venue.dates?.startdate) }}
+    </td>
+
+    <td><button
+      class="btn"
+      (click)="showHide(venue)"
+      style="vertical-align:middle"><span>{{buttonText(venue)}}</span></button></td>
+
+  </tr>
+
+    <tr class="hiddenRow"
+        [hidden]="!venue.visible">
+      <td colspan="6" >
+        <ul>
+          <li><img [src]="venue.media[0]?.url"></li>
+          <li class="name">{{venue.details.en.title}}</li>
+          <hr>
+          <li>{{venue.details.en.calendarsummary}}</li>
+          <li>{{venue.details.en.shortdescription}}</li>
+          <li>{{venue.urls}}</li>
+        </ul>
+      </td>
+  </tr>
+
+  </ng-container>
+
+
+  </tbody>
+</table>
+</div>

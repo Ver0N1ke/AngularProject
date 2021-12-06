@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
+import * as venues from '../assets/venues.json';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'venuesInAmsterdam';
+  venuesJs: any = (venues as any).default
 }
